@@ -1,0 +1,72 @@
+Java Springboot
+
+Microservice Architecture
+
+Linux:
+What is storage driver and overlay2 -- learn with respect to docker and kubernetes -- done
+
+Kubernetes:
+
+Install Kubernetes Manually  -- including installing Flannel/Calico -- done
+Pod -- d
+Deployment -- d
+Services -- d
+Volumes -- d
+PV -- d
+PVC -- d
+Storage Class -- d
+Storage Provisioner -- d
+Service accounts -- d
+Replica Set -- d
+Daemon Set -- d
+Replication Controller -- d
+Stateful Set -- d
+Inter Pod Communication -- d
+Network Topology -- flannel changed to calico *
+
+PSP - Pod Security Policies
+Creating separate user through admin.conf 
+Creating users for kubectl through ca cert file
+API Security - webhook, rbac
+
+--- advanced good to know topics
+Service Mesh
+External Load Balancer - Creating metal lb
+
+Youtube good videos:
+Kubernetes Overview -- watch this a couple days before the interview
+https://www.youtube.com/watch?v=90kZRyPcRZw&list=RDCMUCvqbFHwN-nwalWPjPUKpvTA&index=4
+
+Ingress
+https://www.youtube.com/watch?v=Syw2PzRudIM&list=RDCMUCvqbFHwN-nwalWPjPUKpvTA&index=5
+
+Kubernetes Networking  from scratch:
+https://www.youtube.com/watch?v=6v_BDHIgOY8
+
+Network Policies
+https://www.youtube.com/watch?v=3gGpMmYeEO8&list=RDCMUCvqbFHwN-nwalWPjPUKpvTA&index=10
+github.com/ahmetb/kubernetes-networkpolicy-tutorial
+
+Persistent Storage
+https://www.youtube.com/watch?v=hqE5c5pyfrk&list=RDCMUCvqbFHwN-nwalWPjPUKpvTA&index=4
+
+Certificates
+https://www.youtube.com/watch?v=gXz4cq3PKdg&list=RDCMUCvqbFHwN-nwalWPjPUKpvTA&index=8
+
+Channel - TechWorld With Nana -- This one has complete Kubernetes course. Pretty detailed and nice.
+
+---
+https://www.interviewbit.com/kubernetes-interview-questions/
+
+
+
+---
+
+https://www.oreilly.com/learning-paths/learning-path-certified/9781492061021/?autoplay=false
+
+Github CKAD Prep 
+
+https://github.com/bmuschko/ckad-prep
+https://github.com/twajr/ckad-prep-notes
+https://github.com/dgkanatsios/CKAD-exercises -- done
+https://www.katacoda.com/liptanbiswas/courses/ckad-practice-challenges -- done
