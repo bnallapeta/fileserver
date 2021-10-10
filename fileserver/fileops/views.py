@@ -3,7 +3,7 @@ from fileops.models import Files
 from fileops.serializers import FilesSerializer
 from django.http import Http404
 from rest_framework.views import APIView
-from rest_framework.response import Response, JsonResponse
+from rest_framework.response import Response
 from rest_framework import status
 
 from fileserver.settings import MEDIA_ROOT
@@ -114,7 +114,7 @@ class FilesList(APIView):
             os.remove(file_path)
             return Response(status=status.HTTP_204_NO_CONTENT)
         except:
-            return JsonResponse({'message': 'File cannot be deleted!'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': 'File cannot be deleted!'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class FilesDetail(APIView):
