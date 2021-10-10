@@ -1,4 +1,7 @@
 from django.contrib import admin
 from .models import Files
 
-admin.site.register(Files)
+class FileAdmin(admin.ModelAdmin):
+    readonly_fields = ('id',)
+
+admin.site.register(Files, FileAdmin)
