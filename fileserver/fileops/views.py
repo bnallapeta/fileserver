@@ -1,79 +1,9 @@
 # from posix import ST_NOATIME
-from django.http.response import HttpResponse, JsonResponse
-from django.shortcuts import render
-import requests
-from rest_framework.decorators import action, api_view
-from rest_framework import viewsets, status
-from rest_framework.response import Response
-
-
-from .models import Files
-from .serializers import FilesSerializer
-
-# class FilesViewSet(viewsets.ModelViewSet):
-#     serializer_class = FilesSerializer
-#     queryset = Files.objects.all()
-
-#     @action(detail=True, methods=['DELETE'])
-#     def delete(request):
-#         print("Inside delete custom def")
-#         file_to_be_deleted = request.GET.get('file_name','')
-#         file_to_be_deleted = Files.objects.get(fs_file="uploads/" + file_to_be_deleted)
-#         file_to_be_deleted.delete()
-#         return HttpResponse({'message': 'File deleted'}, status=status.HTTP_204_NO_CONTENT, content_type='text/plain')
-
-#     @action(detail=True, methods=['POST'])
-#     def post(request):
-#         print("Inside post custom def")
-#         print(request)
-
-        
-
-
-# @api_view(['GET', 'POST', 'DELETE'])
-# def files_list(request):
-#     print("insdie getasdfdsf")
-#     if request.method == 'GET':
-#         files = Files.objects.all()
-#         print("insdasdfasdfsdfie getasdfdsf")
-        
-#         serializer_class = FilesSerializer(files, many=True)
-#         return JsonResponse(serializer_class.data, safe=False)
-
-
-# @api_view(['GET', 'PUT', 'DELETE'])
-# def files_detail(request, fs_file):
-#     print(fs_file)
-#     print("insdie delete with pk")    
-#     try:
-#         files = Files.objects.get(fs_file=fs_file)
-#         print(files)
-#         print('\n')
-#         for i in files:
-#             print(i.id)
-#     except Files.DoesNotExist:
-#         return JsonResponse({'message': 'File does not exist'}, status=status.HTTP_404_NOT_FOUND)
-
-#     if request.method == 'DELETE':
-#         files.delete()
-#         return JsonResponse({'message': 'File is deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
-    
-#     if request.method == 'GET':
-#         print("insdie get")
-#         file_names = Files.objects.all()
-#         serializer_class = FilesSerializer(file_names, many=True)
-#         return JsonResponse(serializer_class.data, safe=False)
-
-
-
-
-# re-written code using class-based views from documention of DRF
-
 from fileops.models import Files
 from fileops.serializers import FilesSerializer
 from django.http import Http404
 from rest_framework.views import APIView
-from rest_framework.response import Response
+from rest_framework.response import Response, JsonResponse
 from rest_framework import status
 
 from fileserver.settings import MEDIA_ROOT
@@ -199,21 +129,6 @@ class FilesDetail(APIView):
         files = self.get_object(pk)
         serializer = FilesSerializer(files)
         return Response(serializer.data)
-
-    def put(self, request, pk, format=None):
-
-        # 1. check if the file exists
-        # 2. if does not exists, basically add the file similar to post operation
-        # 3. If it exists, then compare the contents of both files (read op on files) and update content from user file to db file if data is not same
-            # // File operations - path - use media root
-
-
-        files = self.get_object(pk)
-        serializer = FilesSerializer(files, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):
         print("Inside delete custom def2")
