@@ -23,7 +23,7 @@ class FilesList(APIView):
         filename_to_be_added = str(request.FILES['fs_file'])
 
         try:
-            file_to_be_added = Files.objects.filter(fs_file="uploads/" + filename_to_be_added)
+            file_to_be_added = Files.objects.filter(fs_file=filename_to_be_added)
         except:
             file_to_be_added = None
 
@@ -51,7 +51,7 @@ class FilesList(APIView):
         content_from_user_file.append(data.split(" "))
 
         #Get content from the file on the server
-        filename_from_server = MEDIA_ROOT + '\\uploads\\' + filename_to_be_added
+        filename_from_server = MEDIA_ROOT + filename_to_be_added
         file_from_server = open(filename_from_server, 'r')
         content_from_server_file = []
         for i in file_from_server.readlines():
@@ -61,7 +61,7 @@ class FilesList(APIView):
 
         #Check if file with same name exists 
         try:
-            file_to_be_added = Files.objects.filter(fs_file="uploads/" + filename_to_be_added)
+            file_to_be_added = Files.objects.filter(fs_file=filename_to_be_added)
         #except catches any unexpected error encountered while running the above query
         except:
             file_to_be_added = None            
@@ -80,9 +80,9 @@ class FilesList(APIView):
         if content_from_user_file == content_from_server_file:
             return Response({'message': 'File with the same name and content already exists!'}, status=status.HTTP_400_BAD_REQUEST)
         else:
-            file_to_be_deleted = Files.objects.get(fs_file="uploads/" + filename_to_be_added)
+            file_to_be_deleted = Files.objects.get(fs_file=filename_to_be_added)
             file_to_be_deleted.delete()
-            file_path = MEDIA_ROOT + '\\uploads\\' + filename_to_be_added
+            file_path = MEDIA_ROOT + filename_to_be_added
             os.remove(file_path) 
             if serializer.is_valid():
                 serializer.save()
@@ -92,13 +92,13 @@ class FilesList(APIView):
         filename_to_be_deleted = request.GET.get('fs_file','')
         
         try:
-            file_to_be_deleted = Files.objects.get(fs_file="uploads/" + filename_to_be_deleted)
+            file_to_be_deleted = Files.objects.get(fs_file=filename_to_be_deleted)
         except:
             file_to_be_deleted = None
         
         try:
             file_to_be_deleted.delete()
-            file_path = MEDIA_ROOT + '\\uploads\\' + filename_to_be_deleted
+            file_path = MEDIA_ROOT + filename_to_be_deleted
             os.remove(file_path)
             return Response(status=status.HTTP_204_NO_CONTENT)
         except:
@@ -131,8 +131,8 @@ class FilesWordCount(APIView):
         list_of_words = []
         for file in files:
             file_name = str(file.fs_file)
-            file_name = file_name.split('uploads/')[1]
-            file_path = MEDIA_ROOT + '\\uploads\\' + file_name
+            file_path = MEDIA_ROOT + "\\" + file_name
+            print(file_path)
 
             with open(file_path, 'r') as f:
                 for i in f.readlines():
@@ -159,9 +159,8 @@ class FilesFreqWordCount(APIView):
         list_of_words = []
         
         for file in files:
-            file_name = str(file.fs_file)
-            file_name = file_name.split('uploads/')[1]
-            file_path = MEDIA_ROOT + '\\uploads\\' + file_name
+            file_name = str(file.fs_file)            
+            file_path = MEDIA_ROOT + "\\" + file_name
 
             with open(file_path, 'r') as f:
                 for i in f.readlines():

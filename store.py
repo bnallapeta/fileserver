@@ -11,15 +11,15 @@ url_local = "http://127.0.0.1:8000/api/files/"
 operation = sys.argv[1]
 
 def ls():
-    res = requests.get(url)
+    res = requests.get(url_local)
     json_response = res.json()
     for i in range(0, len(json_response)):
-        print(json_response[i].get("fs_file").split("uploads/")[1])
+        print(json_response[i].get("fs_file").split("media/")[1])
 
 def add(*args):
     for i in range(2, len(sys.argv)):
         file_to_be_uploaded = {'fs_file' : open(sys.argv[i], 'rb')}
-        res = requests.post(url, files=file_to_be_uploaded)
+        res = requests.post(url_local, files=file_to_be_uploaded)
         print(res.json())
 
 def remove():
@@ -36,14 +36,14 @@ def update():
         print(res.json())
 
 def wc():
-    res = requests.get(url + 'wc')
+    res = requests.get(url_local + 'wc')
     print(res.json())
 
 def fw():
     if len(sys.argv) > 2:
         order = sys.argv[2]
         options = {'order': order}
-        res = requests.get(url + 'fw', params=options)
+        res = requests.get(url_local + 'fw', params=options)
     else:        
         res = requests.get(url + 'fw')            
     print(res.json())
