@@ -51,7 +51,8 @@ class FilesList(APIView):
         content_from_user_file.append(data.split(" "))
 
         #Get content from the file on the server
-        filename_from_server = MEDIA_ROOT + filename_to_be_added
+        filename_from_server = os.path.join(MEDIA_ROOT, filename_to_be_added)
+
         file_from_server = open(filename_from_server, 'r')
         content_from_server_file = []
         for i in file_from_server.readlines():
@@ -82,7 +83,8 @@ class FilesList(APIView):
         else:
             file_to_be_deleted = Files.objects.get(fs_file=filename_to_be_added)
             file_to_be_deleted.delete()
-            file_path = MEDIA_ROOT + filename_to_be_added
+            file_path = os.path.join(MEDIA_ROOT, filename_to_be_added)
+
             os.remove(file_path) 
             if serializer.is_valid():
                 serializer.save()
@@ -98,7 +100,8 @@ class FilesList(APIView):
         
         try:
             file_to_be_deleted.delete()
-            file_path = MEDIA_ROOT + filename_to_be_deleted
+            file_path = os.path.join(MEDIA_ROOT, filename_to_be_deleted)
+            
             os.remove(file_path)
             return Response(status=status.HTTP_204_NO_CONTENT)
         except:
