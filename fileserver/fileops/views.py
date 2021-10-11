@@ -131,7 +131,7 @@ class FilesWordCount(APIView):
         list_of_words = []
         for file in files:
             file_name = str(file.fs_file)
-            file_path = MEDIA_ROOT + "\\" + file_name
+            file_path = os.path.join(MEDIA_ROOT, file_name)
             print(file_path)
 
             with open(file_path, 'r') as f:
@@ -160,7 +160,7 @@ class FilesFreqWordCount(APIView):
         
         for file in files:
             file_name = str(file.fs_file)            
-            file_path = MEDIA_ROOT + "\\" + file_name
+            file_path = os.path.join(MEDIA_ROOT, file_name)
 
             with open(file_path, 'r') as f:
                 for i in f.readlines():
