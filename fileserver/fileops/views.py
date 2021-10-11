@@ -5,6 +5,7 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.renderers import BrowsableAPIRenderer, JSONRenderer, HTMLFormRenderer
 
 from fileserver.settings import MEDIA_ROOT
 import os
@@ -12,6 +13,10 @@ import collections
 
 
 class FilesList(APIView):
+
+    serializer_class = FilesSerializer
+    renderer_classes = (BrowsableAPIRenderer, JSONRenderer, HTMLFormRenderer)
+
     def get(self, request, format=None):
         files = Files.objects.all()
         serializer = FilesSerializer(files, many=True)
