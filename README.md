@@ -21,7 +21,7 @@ The project is structured under 3 folders:
 
 ### Installation
 
-* For the ease of usability, I have hosted the Django File Server on pythonanywhere.com thus making it possible for you to test this application without any manual steps/installation required with respect to server end.
+* For the ease of usability, I have hosted the Django File Server at http://nrbharath97.pythonanywhere.com/api/files/ thus making it possible for you to test this application without any manual steps/installation required with respect to server end.
 
 * For deploying this application in kubernetes environment, please follow the below steps:
     * Create a Docker Image
