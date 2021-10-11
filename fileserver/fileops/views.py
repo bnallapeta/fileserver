@@ -92,7 +92,7 @@ class FilesList(APIView):
         filename_to_be_deleted = request.GET.get('fs_file','')
         
         try:
-            file_to_be_deleted = Files.objects.get(fs_file=filename_to_be_deleted)
+            file_to_be_deleted = Files.objects.get(fs_file="uploads/" + filename_to_be_deleted)
         except:
             file_to_be_deleted = None
         
